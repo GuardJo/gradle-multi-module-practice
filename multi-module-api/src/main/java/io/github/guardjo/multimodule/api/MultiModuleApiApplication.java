@@ -3,7 +3,10 @@ package io.github.guardjo.multimodule.api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "io.github.guardjo.multimodule.common",
+        "io.github.guardjo.multimodule.api"
+})
 public class MultiModuleApiApplication {
 
     public static void main(String[] args) {
