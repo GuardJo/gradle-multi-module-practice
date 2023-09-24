@@ -1,3 +1,6 @@
+profile-name: "default"
+
+
 spring:
   datasource:
     url: "jdbc:h2:mem:testdb"
@@ -15,3 +18,23 @@ spring:
   h2:
     console:
       enabled: true
+server:
+  port: 8080
+---
+profile-name: "test"
+
+spring:
+  config:
+    activate:
+      on-profile: "test"
+server:
+  port: 8081
+---
+profile-name: "local"
+
+spring:
+  config:
+    activate:
+      on-profile: "local"
+server:
+  port: 8082

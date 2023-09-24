@@ -8,6 +8,7 @@ import io.github.guardjo.multimodule.common.service.TestService;
 import io.github.guardjo.multimodule.common.type.ResponseCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestController {
     private final TestService testService;
+
+    @Value("${profile-name}")
+    private String profileName;
 
     @GetMapping("/test")
     public CommonResponse<String> test() {
@@ -78,6 +82,17 @@ public class TestController {
                 .responseCode(ResponseCode.SUCCESS.getCode())
                 .responseMessage(ResponseCode.SUCCESS.getMessage())
                 .info(members)
+                .build();
+    }
+
+    @GetMapping("/profile")
+    public CommonResponse<String> findProfileName() {
+        log.info("Request Find ProfileName");
+
+        return CommonResponse.<String>builder()
+                .responseCode(ResponseCode.SUCCESS.getCode())
+                .responseMessage(ResponseCode.SUCCESS.getMessage())
+                .info(profileName)
                 .build();
     }
 }
