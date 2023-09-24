@@ -1,6 +1,5 @@
 package io.github.guardjo.multimodule.feign.client;
 
-import io.github.guardjo.multimodule.feign.config.FeignConfig;
 import io.github.guardjo.multimodule.feign.data.ResponseInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(
         name = "demo-client",
         url = "${feign.url.prefix}",
-        configuration = FeignConfig.class
+        configuration = DemoClientConfig.class
 )
 public interface DemoClient {
     @GetMapping
