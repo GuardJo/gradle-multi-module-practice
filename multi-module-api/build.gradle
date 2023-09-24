@@ -32,6 +32,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation project(':multi-module-common')
+    implementation project(':multi-module-async')
 }
 
 tasks.named('test') {
