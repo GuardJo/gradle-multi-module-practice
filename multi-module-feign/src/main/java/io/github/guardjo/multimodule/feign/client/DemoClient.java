@@ -16,4 +16,7 @@ public interface DemoClient {
     @GetMapping
     ResponseEntity<ResponseInfo> callGet(@RequestHeader("external-header") String header,
                                          @RequestParam("name") String name);
+
+    @GetMapping("/not-found")
+    ResponseEntity<ResponseInfo> callGetNotFound();
 }

@@ -25,4 +25,11 @@ public class DemoController {
 
         return feignService.callGet(requestInfo);
     }
+
+    @GetMapping("/not-found")
+    public ResponseInfo callGetNotFound() {
+        log.info("Request Get External Server Not Found Response");
+
+        return feignService.callGetNotFound();
+    }
 }

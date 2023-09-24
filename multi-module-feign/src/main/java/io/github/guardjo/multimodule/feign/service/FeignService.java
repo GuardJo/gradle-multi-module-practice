@@ -18,4 +18,10 @@ public class FeignService {
 
         return demoClient.callGet(requestInfo.getHeader(), requestInfo.getName()).getBody();
     }
+
+    public ResponseInfo callGetNotFound() {
+        log.info("Call External Get Not Found");
+
+        return demoClient.callGetNotFound().getBody();
+    }
 }
