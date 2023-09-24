@@ -14,6 +14,7 @@ import static feign.Util.*;
 @RequiredArgsConstructor(staticName = "create")
 @Slf4j
 public class FeignCustomLogger extends Logger {
+    private final static int LIMIT_ELAPSE_TIME = 3000;
 
     @Override
     protected void log(String configKey, String format, Object... args) {
@@ -54,6 +55,9 @@ public class FeignCustomLogger extends Logger {
                 bodyLength = bodyData.length;
                 if (logLevel.ordinal() >= Level.FULL.ordinal() && bodyLength > 0) {
                     log(configKey, "%s", decodeOrDefault(bodyData, UTF_8, "Binary data"));
+                }
+                if (elapsedTime > LIMIT_ELAPSE_TIME) {
+                    log(configKey, "<--- Slow API (%d)", elapsedTime);
                 }
                 log(configKey, "<--- END HTTP (%s-byte body)", bodyLength);
                 return response.toBuilder().body(bodyData).build();
