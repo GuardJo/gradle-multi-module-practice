@@ -9,3 +9,4 @@ rootProject.name = 'gradle-multi-module-practice'
 
 include 'multi-module-api'
 include 'multi-module-common'
+include 'multi-module-async'
