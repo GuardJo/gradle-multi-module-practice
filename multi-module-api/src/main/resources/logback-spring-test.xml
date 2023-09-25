@@ -1,0 +1,33 @@
+<included>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <appender name="CUSTOM_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <layout>
+            <pattern>
+                [CUSTOM_CONSOLE] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{0}:line] -%msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="CUSTOM_FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/api.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/api.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>1KB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [CUSTOM_FILE_LOG] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{0}:line] -%msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CUSTOM_CONSOLE"/>
+        <appender-ref ref="CUSTOM_FILE_LOG"/>
+    </root>
+</included>
