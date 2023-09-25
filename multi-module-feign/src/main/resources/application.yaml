@@ -1,0 +1,15 @@
+feign:
+  url:
+    prefix: "http://localhost:8080/external"
+  client:
+    config:
+      default:
+        connect-timeout: 1000
+        read-timeout: 3000
+        logger-level: NONE
+      demo-client:
+        connect-timeout: 3000
+        read-timeout: 10000
+        logger-level: HEADERS
+server:
+  port: 8888
