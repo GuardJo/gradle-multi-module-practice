@@ -1,5 +1,5 @@
 <included>
-    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <property resource="logback-variable.properties"/>
 
     <appender name="CUSTOM_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -7,21 +7,21 @@
         </filter>
         <layout>
             <pattern>
-                [CUSTOM_CONSOLE] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{0}:line] -%msg%n
+                [CUSTOM_CONSOLE] ${LOG_PATTERN}
             </pattern>
         </layout>
     </appender>
 
     <appender name="CUSTOM_FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/api.log</file>
+        <file>${LOG_DIR}/api.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>logs/api.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
-            <maxFileSize>1KB</maxFileSize>
+            <fileNamePattern>${LOG_DIR}/api.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>10KB</maxFileSize>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
-                [CUSTOM_FILE_LOG] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{0}:line] -%msg%n
+                [CUSTOM_FILE_LOG] ${LOG_PATTERN}
             </pattern>
         </encoder>
     </appender>
