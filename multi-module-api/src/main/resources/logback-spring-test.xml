@@ -30,7 +30,7 @@
         <file>${LOG_DIR}/api_mdc.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_DIR}/api_mdc.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
-            <maxFileSize>10KB</maxFileSize>
+            <maxFileSize>100KB</maxFileSize>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -49,12 +49,26 @@
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_DIR}/error.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
-            <maxFileSize>10KB</maxFileSize>
+            <maxFileSize>100KB</maxFileSize>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
                 [CUSTOM_ERROR] ${LOG_MDC_PATTERN} ${LOG_PATTERN}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC_API_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/api_async.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/api_async.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>100KB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [CUSTOM_FILE_LOG] ${LOG_MDC_PATTERN} ${LOG_PATTERN}
             </pattern>
         </encoder>
     </appender>
@@ -65,4 +79,8 @@
         <appender-ref ref="CUSTOM_MDC_FILE_LOG"/>
         <appender-ref ref="CUSTOM_ERROR_LOG"/>
     </root>
+
+    <logger name="ASYNC_LOG" level="INFO" additivity="false">
+        <appender-ref ref="ASYNC_API_LOG"/>
+    </logger>
 </included>
