@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/async")
 @RestController
-@Slf4j
+@Slf4j(topic = "ASYNC_LOG")
 @RequiredArgsConstructor
 public class AsyncController {
     private final AsyncService asyncService;

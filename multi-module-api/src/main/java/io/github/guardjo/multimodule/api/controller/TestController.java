@@ -95,4 +95,15 @@ public class TestController {
                 .info(profileName)
                 .build();
     }
+
+    @GetMapping("/error-log")
+    public CommonResponse<String> printErrorLog() {
+        log.error("Error Log Test");
+
+        return CommonResponse.<String>builder()
+                .responseCode(ResponseCode.FAIL.getCode())
+                .responseMessage(ResponseCode.FAIL.getMessage())
+                .info("Error Log")
+                .build();
+    }
 }
