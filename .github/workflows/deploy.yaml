@@ -45,7 +45,7 @@ jobs:
 
       - name: Upload to AWS s3
         run: |
-          aws s3 cp --region ${{ secrets.AWS_REGION_IDENTIFIER }} \ 
+          aws s3 cp \ 
           ./$GITHUB_SHA.zip \
           s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
 
