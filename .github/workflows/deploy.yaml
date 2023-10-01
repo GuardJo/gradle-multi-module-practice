@@ -51,7 +51,7 @@ jobs:
       - name: Deploy Project
         run: |
           aws deploy create-deployment \
-            --application-name ${{ env.$AWS_CODE_DEPLOY_APP_NAME }} \
+            --application-name ${{ env.AWS_CODE_DEPLOY_APP_NAME }} \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --deployment-group-name ${{ env.AWS_CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
             --s3-location bucket=${{ env.S3_BUCKET_NAME }}.bundleType=zip,key=$GITHUB_SHA.zip
