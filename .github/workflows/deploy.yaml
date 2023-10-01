@@ -1,0 +1,57 @@
+name: CICD-action
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  S3_BUCKET_NAME: guardjo-bucket
+  AWS_CODE_DEPLOY_APP_NAME: code-deploy-test
+  AWS_CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: code-deploy-test-group
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4.1.0
+
+      - name: Setup jdk11
+        uses: actions/setup-java@v3.13.0
+        with:
+          java-version: 11
+
+      - name: Grant config to gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+
+      - name: Build gradle modules
+        run: ./gradlew clean build :buildNeeds -x test
+        shell: bash
+
+      - name: Zip project modules
+        run: zip -r ./$GITHUB_SHA .
+        shell: bash
+
+      - name: Initialize AWS access key
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION_IDENTIFIER }}
+          aws-access-key-id: ${{ secrets.AWS_S3_PUBLIC_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_KEY }}
+
+      - name: Upload to AWS s3
+        run: |
+          aws s3 cp --region ${{ secrets.AWS_REGION_IDENTIFIER }} \ 
+          ./$GITHUB_SHA.zip \
+          s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
+
+      - name: Deploy Project
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ env.$AWS_CODE_DEPLOY_APP_NAME }} \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --deployment-group-name ${{ env.AWS_CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=${{ env.S3_BUCKET_NAME }}.bundleType=zip,key=$GITHUB_SHA.zip
