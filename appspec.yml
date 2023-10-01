@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+
+files:
+  - sources: /
+    destination: /home/ubuntu/code-deploy/gradle-multi-module-practice
+    override: true
+
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  ApplicationStart:
+    - location: scripts/deploy.sh
+      timeout: 60
+      runas: ubuntu
