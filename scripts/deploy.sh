@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 API_JAR_PATH="../multi-module-api/build/libs/*.jar"
 BUILD_JAR=$(ls $API_JAR_PATH)
