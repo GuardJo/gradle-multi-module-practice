@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_NAME="github-action"
+PROJECT_NAME="gradle-multi-module-practice"
 API_JAR_PATH="../multi-module-api/build/libs/*.jar"
 DEPLOY_PATH="/home/ubuntu/$PROJECT_NAME/"
 DEPLOY_LOG_PATH="$DEPLOY_PATH/deploy.log"
