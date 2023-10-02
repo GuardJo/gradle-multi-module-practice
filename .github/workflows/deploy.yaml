@@ -28,6 +28,10 @@ jobs:
         run: chmod +x ./gradlew
         shell: bash
 
+      - name: Grant config to deploy script
+        run: chmod +x scripts/deploy.sh
+        shell: bash
+
       - name: Build gradle modules
         run: ./gradlew clean build :buildNeeded -x test
         shell: bash
