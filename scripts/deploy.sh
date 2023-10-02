@@ -1,6 +1,6 @@
 #!/bin/bash
 
-API_JAR_PATH="../multi-module-api/build/libs/*.jar"
+API_JAR_PATH="/home/ubuntu/code-deploy/gradle-multi-module-practice/multi-module-api/build/libs/*.jar"
 BUILD_JAR=$(ls $API_JAR_PATH)
 JAR_NAME=$(basename $BUILD_JAR)
 
