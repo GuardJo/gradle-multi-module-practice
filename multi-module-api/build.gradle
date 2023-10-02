@@ -40,3 +40,7 @@ tasks.named('test') {
 }
 
 tasks.register("prepareKotlinBuildScriptModel")
+
+tasks.jar {
+    enabled(false)
+}
